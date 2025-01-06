@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:flutter_svg/flutter_svg.dart";
 import "package:google_fonts/google_fonts.dart";
+import "package:to_do_list/firebase_services.dart";
 import 'model_class.dart';
 import 'package:intl/intl.dart';
 
@@ -179,14 +180,20 @@ class _MainAppState extends State<StatefulWidget> {
                           padding: const EdgeInsets.only(left: 130, top: 15),
                           child: GestureDetector(
                             onTap: () {
-                              if (isEdit == true) {
-                                submitData(true, obj);
-                              } else {
-                                submitData(false);
-                              }
-                              setState(() {
-                                clearBottomSheet();
-                              });
+                              // if (isEdit == true) {
+                              //   submitData(true, obj);
+                              // } else {
+                              //   submitData(false);
+                              // }
+                              // setState(() {
+                              //   clearBottomSheet();
+                              // });
+                              FirebaseServices.addCard(
+                                  titleController.text,
+                                  descriptionController.text,
+                                  dateController.text);
+                              submitData(isEdit);
+                              
                             },
                             child: Text(
                               "Submit",

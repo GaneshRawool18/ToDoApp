@@ -39,4 +39,19 @@ class FirebaseServices {
     }
     log("map data $mapData");
   }
+
+  static void addCard(String title, String description, String date) {
+    Map<String, dynamic> data = {
+      "title": title,
+      "description": description,
+      "date": date
+    };
+    FirebaseFirestore.instance.collection("ToDoData").doc(title).set(data);
+  }
+
+  static void getCardData (String title)async{
+  DocumentSnapshot getToDoData = await  FirebaseFirestore.instance.collection("ToDoData").doc(title).get();
+  dynamic mapDat = getToDoData.data()!;
+  log(" Map Data $mapDat");
+  }
 }
